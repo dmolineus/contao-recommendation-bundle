@@ -59,6 +59,7 @@ $GLOBALS['TL_DCA']['tl_recommendation_archive'] = [
         ],
         'operations' => [
             'edit' => [
+                'primary'             => true,
                 'href'                => 'act=edit',
                 'icon'                => 'edit.svg',
                 'button_callback'     => [RecommendationArchiveListener::class, 'edit']
@@ -137,20 +138,3 @@ $GLOBALS['TL_DCA']['tl_recommendation_archive'] = [
     ]
 ];
 
-// Backwards compatibility for old icons and position
-$version = ContaoCoreBundle::getVersion();
-
-if (version_compare($version, '5', '<'))
-{
-    $GLOBALS['TL_DCA']['tl_recommendation_archive']['list']['operations']['edit']['icon'] = 'header.svg';
-    $GLOBALS['TL_DCA']['tl_recommendation_archive']['list']['operations']['children']['icon'] = 'edit.svg';
-
-    // Swap places for backwards compatibility
-    [
-        $GLOBALS['TL_DCA']['tl_recommendation_archive']['list']['operations']['children'],
-        $GLOBALS['TL_DCA']['tl_recommendation_archive']['list']['operations']['edit']
-    ] = [
-        $GLOBALS['TL_DCA']['tl_recommendation_archive']['list']['operations']['edit'],
-        $GLOBALS['TL_DCA']['tl_recommendation_archive']['list']['operations']['children']
-    ];
-}
